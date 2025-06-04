@@ -15,18 +15,30 @@
     --gold-color: hsl(36, 66%, 53%);
     --blue-light: hsla(219, 100%, 84%, 0.949);
     --blue-login: rgb(28, 100, 255);
-    --blue-dark-menu: rgb(55, 94, 168);
+    --blue-medium-menu: rgb(55, 94, 168);
+    --blue-dark:rgb(26, 48, 117);
     
   
     /*==== gradiente ====*/
     --gradient1: linear-gradient(
       to right bottom,
       hsl(0, 0%, 5%),
-      hsl(38, 61%, 20%),
+      hsl(38, 60%, 20%),
       hsl(43, 70%, 35%),
       hsl(44, 85%, 45%),
       hsl(45, 90%, 50%),
       hsl(45, 95%, 60%)
+    );
+
+    --gradient2: linear-gradient(
+      to right bottom,
+      hsl(231, 100%, 5%),   /* quase preto, muito escuro */
+      hsl(231, 68%, 19%),   /* sua cor base */
+      hsl(231, 68%, 14%),   /* mais claro */
+      hsl(231, 65%, 26%),   /* ainda mais claro */
+      hsl(231, 81%, 54%),   /* tom pastel azul */
+      hsl(231, 60%, 35%)    /* azul claro suave */
+
     );
   
     /*====cor do texto ====*/
@@ -161,11 +173,11 @@
   }
   
   ::-webkit-scrollbar-track {
-    background-color: hsl(0, 0%, 98%);
+    background-color: hsla(219, 100%, 84%, 0.949);
   }
   
   ::-webkit-scrollbar-thumb {
-    background-color: hsl(36, 66%, 53%);
+    background-color: white;
   }
 
   .h1,
@@ -207,19 +219,20 @@
 
 .btn {
     position: relative;
-    background-color: rgb(28, 100, 255);
+    background-color: var(--blue-login);
     color: var(with);
     font-size: var(--fs-8);
-    font-weight: var(--weight-semiBold);
     min-width: 120px;
     height: 50px;
     display: grid;
     place-items: center;/*faz a função do align-itens center e justify-content center ao mesmo tempo*/
     padding-inline: 30px;
+    transition: 0.3s ease;
 }
 
 .btn:hover {
     transform: scale(1.05);
+    transition: 0.3s ease;
 }
 
 .search-btn {
@@ -259,7 +272,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    background: var(--blue-light);
+    background: var(--blue-dark);
     padding: 10px 12px;
     z-index: 4;
     box-shadow: 0 8px 20px rgba(180, 198, 255, 0.6);
@@ -291,7 +304,6 @@
   padding: 12px 25px;
   text-transform: uppercase;
   font-size: var(--fs-8);
-  font-weight: var(--weight-semiBold);
   color: white;
   transition: color 0.3s ease;
 }
@@ -333,7 +345,7 @@
   position: absolute;
   top: 120%;
   left: 0;
-  background-color: var(--blue-light);
+  background-color: var(--blue-dark);
   box-shadow: 0 8px 20px rgba(180, 198, 255, 0.6);
   border-radius: 8px;
   min-width: 180px;
@@ -395,7 +407,7 @@
   border-radius: 8px;
   outline: none;
   color: #fff;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+  box-shadow: 0 0 10px var(--blue-light);
 }
 
 .search-input::placeholder {
@@ -627,7 +639,7 @@
   box-shadow: 0 12px 24px rgba(142, 140, 140, 0.15);
 }
 
-/*LOGIN*/
+/* login */
 .container-login {
   display: flex;
   justify-content: center;
@@ -636,7 +648,7 @@
   margin: 0 auto;
   background: var(--black-color);
 
-  /*Abrir em tela cheio o login*/
+  /* Abrir em tela cheia o login */
   position: fixed;
   top: 0;
   left: 0;
@@ -655,7 +667,8 @@
   width: 750px;
   height: 450px;
   background: transparent;
-  border: 2px solid var(--blue-light);
+  border: 2px solid rgb(26, 48, 117);
+  /* box-shadow: 1px 0px 20px 3px var(--gold-color); */
   overflow: hidden;
 }
 
@@ -690,7 +703,7 @@
   border-bottom: 2px solid var(--white-color);
   color: var(--white-color);
   font-size: 16px;
-  padding-right: 25px;
+  padding-right: 23px;
 }
 
 .input-box label {
@@ -745,11 +758,11 @@
 
 .logreg-link p a {
   color: var(--blue-login);
-  font-weight: var(--weight-semiBold);
 }
 
 .logreg-link p a:hover {
   text-decoration: underline;
+  /* color: var(--gold-color2); */
 }
 
 .wrapper .form-box.login {
@@ -757,11 +770,17 @@
   padding: 0 60px 0 40px;
 }
 
-.input-box input:focus ~ label,
-.input-box input:valid ~ label {
+.input-box input:focus ~ label, 
+.input-box input:valid ~ label{
   top: -5px;
   color: var(--blue-login);
 }
+
+/*.input-box input:focus ~ ion-icon, 
+.input-box input:valid ~ ion-icon{
+  top: -5px;
+  color: var(--gold-color);
+}*/
 
 .wrapper .info-text {
   position: absolute;
@@ -771,10 +790,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-.wrapper .info-text.login {
-  right: 0;
 }
 
 .info-text h2 {
@@ -793,32 +808,33 @@
 .wrapper .info-text.login {
   right: 0;
   text-align: right;
-  padding: 0 40px 0 60px;
+  padding: 0 40px 0 100px;
 }
 
 .wrapper .bg-animate {
   position: absolute;
-  background: linear-gradient(to top, rgb(11, 55, 150), rgb(125, 166, 255));
+  background: var(--gradient2);
   top: 0;
-  left: 0;
+  right: 0;
   width: 850px;
   height: 600px;
-  transform: rotate(10deg) skewY(30deg);
+    /* transform: rotate(10deg) skewY(40deg); */
+  transform: rotate(10deg) skewY(40deg);
   transform-origin: bottom right;
-  border-bottom: 3px solid var(--blue-light);
+  border-bottom: 3px solid hsl(231, 81%, 54%);
 }
 
 .wrapper .bg-animate2 {
   position: absolute;
-  background: linear-gradient(to top, rgb(11, 55, 150), rgb(125, 166, 255));
+  background: #0e0e0e;
   top: 100%;
   left: 250px;
   width: 850px;
   height: 700px;
-  /*transform: rotate(-11deg) skewY(-44deg);*/
+  /* transform: rotate(-11deg) skewY(-41deg); */
   transform: rotate(0deg) skewY(0deg);
-  transform-origin: bottom right;
-  border-bottom: 3px solid var(--blue-light);
+  transform-origin: bottom left;
+  border-bottom: 3px solid var(--gold-color);
 }
 
 .wrapper .form-box.register {
@@ -836,13 +852,24 @@
 
 .wrapper.active .form-box.login .animation {
   transform: translateX(-120%);
+  transition-delay: calc(0.1s * var(--i));
 }
 
-.wrapper.active .form-box.login .animation {
+.wrapper .form-box.login .animation {
   transition: 0.7s ease;
-  transform: translateX();
+  transform: translateX(0);
 }
 
+
+.wrapper .info-text.login .animation {
+  transition: 0.7s ease;
+  transform: translateX(0);
+}
+
+.wrapper.active .info-text.login .animation {
+  transform: translateX(120%);
+  transition-delay: calc(0.1s * var(--i));
+}
 
 
 
@@ -898,7 +925,7 @@
 }
 
 .about-banner img:hover {
-  filter: contrast(1.4) brightness(1.1);
+  filter: contrast(1.0) brightness(1.1);
 }
 
 .about .section-text-1 {
